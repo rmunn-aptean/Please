@@ -1,0 +1,104 @@
+﻿body
+{
+    font-size: 14px;
+    color: Aqua;
+    background: black;
+}
+b
+{
+    display: block;
+    left:100px;
+    top:100px;
+	width: 50px;
+	height: 50px;
+	border-radius: 6px;
+	background:red;
+    position:absolute;
+    animation:myfirst 5s;
+    animation-iteration-count: infinite;
+	
+}
+
+b:nth-child(1) {
+  animation-delay: 1.25s;
+}
+b:nth-child(2) {
+  animation-delay: 2.5s;
+}
+b:nth-child(3) {
+  animation-delay: 3.75s;  
+}
+
+.container{
+
+	/* Set a counter named cnt to 0 */
+	counter-reset: cnt;
+
+	position:relative;
+	text-align:center;
+	padding:20px 0;
+	width:420px;
+	height: 160px;
+	margin: 0 auto;
+}
+
+/* You can style pseudo elements and give them content,
+   as if they were real elements on the page */
+
+.container::before{
+	display: block;
+	content:'Hover over these items:';
+	font-size:18px;
+	font-weight:bold;
+	text-align:center;
+	padding:15px;
+}
+.container span{
+	display:inline-block;
+	padding:2px 6px;
+	background-color:#78CCD2;
+	color:#186C72;
+	border-radius:4px;
+	margin:3px;
+	cursor:default;
+}
+.container span::after{
+
+	/* Every time this rule is executed, the 
+	   counter value is increased by 1 */
+	counter-increment: cnt;
+
+	/* Add the counter value as part of the content */
+	content:" #" counter(cnt);
+
+	display:inline-block;
+	padding:4px;
+}
+
+.container span::before{
+	position:absolute;
+	bottom:0;
+	left:0;
+	width:100%;
+	content:attr(data-title);
+	color:#666;
+
+	opacity:0;
+
+	/* Animate the transitions */
+	-webkit-transition:opacity 0.4s;
+	transition:opacity 0.4s;
+}
+
+.container span:hover::before{
+	opacity:1;
+}
+
+@keyframes myfirst
+{
+0%   {background:red; left:100px; top:100px;}
+25%  {background:yellow; left:160px; top:100px;}
+50%  {background:blue; left:160px; top:160px;}
+75%  {background:green; left:100px; top:160px;}
+100% {background:red; left:100px; top:100px;}
+}
